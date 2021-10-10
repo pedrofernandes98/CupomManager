@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>CupomManager</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./script.js"></script>
+    <!-- <script src="./toferrado.js"></script> -->
+  </head>
+
+  <body>
+    <header class="headerBar dark">
+      <div class="appName">CupomManager</div>
+    </header>
+    
+    <div id="tela1" class="component">
+      <button id="btnAdic" class="button primary btnAdd">
+        <img src="./assets/plus1.png" />
+      </button>
+      <div class="componentHeader">
+            <h2 class="componentTitle">Filtros</h2>
+            <button id="btnFiltro" class="button secundary">
+                <img src="./assets/lupa.png" />
+            </button>
+      </div>
+      <div class="componentContent">
+        <div id="blank">
+          <img src="./assets/hangloose.png" />
+          <p>Nada a fazer agora.</p>
+        </div>
+        <ul id="listaDeTarefas" class="list">
+                 
+        </ul>
+      </div>
+      
+    </div>
+
+    <div id="tela2" class="component hidden">
+      <div class="componentHeader">
+        <h1 class="componentTitle">
+          Novo cupom
+        </h1>
+      </div>
+      <div class="componentContent">
+        <div class="field">
+          <label for="inputCupom">Loja:</label>
+          <input id="inputCupom" type="text" autocomplete="off" />
+        </div>
+        <div class="field">
+            <label for="inputDescricao">Descrição:</label>
+            <input id="inputDescricao" type="text" autocomplete="off" />
+        </div>
+        <div class="field">
+          <label for="inputPercentual">Percentual de Desconto:</label>
+          <input id="inputPercentual" type="number" autocomplete="off" min="0" max="100" />%
+        </div>
+        <div class="field">
+          <label for="inputValorMinimo">Valor mínimo:</label>
+          <input id="inputValorMinimo" type="number" autocomplete="off" min="0" />
+        </div>
+        <div class="field">
+            <label for="inputDataExpiracao">Data de Expiração</label>
+            <input id="inputDataExpiracao" type="date" />
+        </div>
+        <div class="field">
+            <label for="inputCodigo">Código:</label>
+            <input id="inputCodigo" type="text" autocomplete="off" />
+        </div>
+        <div class="buttonGroup mt1 end">
+          <button id="btnCanc1" class="button quarter light">Cancelar</button>
+          <button id="btnInc" class="button quarter primary" disabled>
+            Incluir
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="tela3" class="component hidden">
+      <div class="componentHeader">
+        <h1 class="componentTitle">Dados do cupom</h1>
+      </div>
+      <div class="componentContent">
+        <div class="field">
+          <label for="inputCupom">Loja:</label>
+          <input id="inputCupom" type="text" autocomplete="off" />
+        </div>
+        <div class="field">
+            <label for="inputDescricao">Descrição:</label>
+            <input id="inputDescricao" type="text" autocomplete="off" />
+        </div>
+        <div class="field">
+          <label for="inputPercentual">Percentual de Desconto:</label>
+          <input id="inputPercentual" type="number" autocomplete="off" min="0" max="100" />%
+        </div>
+        <div class="field">
+          <label for="inputValorMinimo">Valor mínimo:</label>
+          <input id="inputValorMinimo" type="number" autocomplete="off" min="0" />
+        </div>
+        <div class="field">
+            <label for="inputDataExpiracao">Data de Expiração</label>
+            <input id="inputDataExpiracao" type="date" />
+        </div>
+        <div class="field">
+            <label for="inputCodigo">Código:</label>
+            <input id="inputCodigo" type="text" autocomplete="off" />
+        </div>
+        <div class="buttonGroup end mt1">
+          <button id="btnCanc2" class="button quarter light">Cancelar</button>
+          <button id="btnAlt" class="button quarter primary">Alterar</button>
+        </div>
+        <div class="buttonGroup end mt3">
+          <button id="btnDel" class="button quarter danger">
+            Apagar tarefa
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div id="tela4">
+        <div class="componentHeader">
+        <h1 class="componentTitle">Filtro do cupom</h1>
+      </div>
+      <div class="componentContent">
+        <div class="field" style="flex-wrap: wrap;">
+          <label for="inputCupom">Por Loja/Descrição:</label>
+          <input id="inputCupom" type="text" autocomplete="off" />
+        </div>
+        <br>
+        <hr>
+        <br>
+        <div class="buttonGroup end mt1">
+          <button id="btnCanc3" class="button quarter light">Cancelar</button>
+          <button id="btnFiltrar" class="button quarter primary">Filtrar</button>
+        </div>
+      </div>
+    </div> -->
+  </body>
+</html>
