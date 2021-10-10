@@ -1,4 +1,4 @@
-let tarefas = [];
+let cupons = [];
 let filtros = {};
 
 onload = () => {
@@ -25,11 +25,11 @@ onload = () => {
 
   mostra();
   
-  const t = JSON.parse(localStorage.getItem('tarefas'));
+  const t = JSON.parse(localStorage.getItem('cupons'));
   const f = JSON.parse(localStorage.getItem('filtros'));
-  if (t) tarefas = t;
+  if (t) cupons = t;
   if (f) filtros = f;
-  mostraTarefas();
+  mostraCupons();
 
   document.querySelector('#btnAdic').onclick = () => {
     document.querySelector('#btnInc').disabled = false;
@@ -70,11 +70,11 @@ onload = () => {
   };
 
   document.querySelector('#btnAlt').onclick = () => {
-    alteraTarefa();
+    alteraCupom();
   };
 
   document.querySelector('#btnDel').onclick = () => {
-    apagaTarefa();
+    apagaCupom();
   };
 
   document.querySelector('#btnFiltro').onclick = () => {
@@ -89,31 +89,31 @@ onload = () => {
   //   adicionaFiltro();
   //   salvaFiltro();
   //   ativa('tela1');
-  //   mostraTarefas();
+  //   mostraCupons();
   // };
 };
 
-const mostraTarefas = () => {
-  const listaDeTarefas = document.querySelector('#listaDeTarefas');
-  listaDeTarefas.innerHTML = '';
+const mostraCupons = () => {
+  const listaCupons = document.querySelector('#listaCupons');
+  listaCupons.innerHTML = '';
   //let listaFiltrada = [];
 
     // if(filtros){
     //   var str = filtros.texto.toLowerCase();
-    //   tarefas.forEach((t) => {
+    //   cupons.forEach((t) => {
     //     if(t.lojaCupom.toLowerCase().includes(str) || t.descricao.toLowerCase().includes(str)){
     //       listaFiltrada.push(t);
     //     }
     //   });
 
-    //   tarefas = listaFiltrada;
+    //   cupons = listaFiltrada;
     // }
   
-  console.log(tarefas);
-  tarefas.forEach((t) => {
+  console.log(cupons);
+  cupons.forEach((t) => {
     console.log(t)
-    let elemTarefa = document.createElement('li');
-    elemTarefa.innerHTML = `<div class="" style="border: solid 1px;">
+    let elemCupom = document.createElement('li');
+    elemCupom.innerHTML = `<div class="" style="border: solid 1px;">
     <div class="containerCupom">
         <div class="percentCupom">
             ${t.percentual}%
@@ -131,8 +131,8 @@ const mostraTarefas = () => {
     <button class="button" style="width: 100%;
     margin: 5px 0px 5px 0px;">Ver cupom</button>
     </div> `;
-    elemTarefa.setAttribute('data-id', t.id)
-    elemTarefa.onclick = () => {
+    elemCupom.setAttribute('data-id', t.id)
+    elemCupom.onclick = () => {
       let campoLojaCupom = document.querySelector('#tela3 #inputCupom');
       let campoDescricao = document.querySelector('#tela3 #inputDescricao');
       let campoPercentual = document.querySelector('#tela3 #inputPercentual');
@@ -153,14 +153,14 @@ const mostraTarefas = () => {
       campoLojaCupom.setAttribute('data-id', t.id);
       campoLojaCupom.focus();
     };
-    listaDeTarefas.appendChild(elemTarefa);
+    listaCupons.appendChild(elemCupom);
   });
-  //document.querySelector('#estado').innerText = tarefas.length;
-  if (tarefas.length > 0) {
-    listaDeTarefas.classList.remove('hidden');
+  //document.querySelector('#estado').innerText = cupons.length;
+  if (cupons.length > 0) {
+    listaCupons.classList.remove('hidden');
     document.querySelector('#blank').classList.add('hidden');
   } else {
-    listaDeTarefas.classList.add('hidden');
+    listaCupons.classList.add('hidden');
     document.querySelector('#blank').classList.remove('hidden');
   }
 };
@@ -172,22 +172,6 @@ const ativa = (comp) => {
   listaDeTelas.forEach((c) => c.classList.add('hidden'));
   document.querySelector('#' + comp).classList.remove('hidden');
 };
-
-const adicionaTarefa = () => {
-  let campo = document.querySelector('#inputNovaTarefa');
-  let descricao = campo.value;
-  if (descricao != '') {
-    tarefas.push({
-      id: Math.random().toString().replace('0.', ''),
-      descricao: descricao,
-    });
-    campo.value = '';
-    ativa('tela1');
-    salvaTarefas();
-    mostraTarefas();
-  }
-};
-
 
 const adicionaCupom = () => {
   let campoLojaCupom = document.querySelector('#inputCupom');
@@ -209,7 +193,7 @@ const adicionaCupom = () => {
 
   //Realizar validações de formulários
   if (descricao != '') {
-    tarefas.push({
+    cupons.push({
       id: Math.random().toString().replace('0.', ''),
       lojaCupom: lojaCupom,
       descricao: descricao,
@@ -228,11 +212,11 @@ const adicionaCupom = () => {
     campoCodigo.value = '';
 
     ativa('tela1');
-    salvaTarefas();
-    mostraTarefas();
+    salvaCupons();
+    mostraCupons();
   }
 
-  console.log(tarefas);
+  console.log(cupons);
 };
 
 const monitoraCampoAdic = (e) => {
@@ -241,7 +225,7 @@ const monitoraCampoAdic = (e) => {
   else botao.disabled = true;
 };
 
-const alteraTarefa = () => {
+const alteraCupom = () => {
   
   let campoLojaCupom = document.querySelector('#tela3 #inputCupom');
   let campoDescricao = document.querySelector('#tela3 #inputDescricao');
@@ -261,13 +245,13 @@ const alteraTarefa = () => {
   let dataAtual = new Date();
   let status = Date.parse(dataExpiracao) << dataAtual.getDate();
 
-  let idTarefa = campoLojaCupom.getAttribute('data-id');
+  let idCupom = campoLojaCupom.getAttribute('data-id');
   
-  let i = tarefas.findIndex((t) => t.id == idTarefa);
+  let i = cupons.findIndex((t) => t.id == idCupom);
 
-  console.log(tarefas[i])
-  tarefas[i] = {
-    id: idTarefa,
+  console.log(cupons[i])
+  cupons[i] = {
+    id: idCupom,
     lojaCupom: lojaCupom,
     descricao: descricao,
     percentual: percentual,
@@ -287,23 +271,11 @@ const alteraTarefa = () => {
   campoLojaCupom.removeAttribute('data-id');
 
   ativa('tela1');
-  salvaTarefas();
-  mostraTarefas();
+  salvaCupons();
+  mostraCupons();
 };
 
-const alteraCupom = () => {
-  let campo = document.querySelector('#inputAlteraTarefa');
-  let idTarefa = campo.getAttribute('data-id');
-  let i = tarefas.findIndex((t) => t.id == idTarefa);
-  tarefas[i].descricao = campo.value;
-  campo.value = '';
-  campo.removeAttribute('data-id');
-  ativa('tela1');
-  salvaTarefas();
-  mostraTarefas();
-};
-
-const apagaTarefa = () => {
+const apagaCupom = () => {
   let campoLojaCupom = document.querySelector('#tela3 #inputCupom');
   let campoDescricao = document.querySelector('#tela3 #inputDescricao');
   let campoPercentual = document.querySelector('#tela3 #inputPercentual');
@@ -311,8 +283,8 @@ const apagaTarefa = () => {
   let campoDataExpiracao = document.querySelector('#tela3 #inputDataExpiracao');
   let campoCodigo = document.querySelector('#tela3 #inputCodigo');
   
-  let idTarefa = campoLojaCupom.getAttribute('data-id');
-  tarefas = tarefas.filter((t) => t.id != idTarefa);
+  let idCupom = campoLojaCupom.getAttribute('data-id');
+  cupons = cupons.filter((t) => t.id != idCupom);
   
   campoLojaCupom.value = ''; 
   campoDescricao.value = '';
@@ -323,8 +295,8 @@ const apagaTarefa = () => {
 
   campoLojaCupom.removeAttribute('data-id');
   ativa('tela1');
-  salvaTarefas();
-  mostraTarefas();
+  salvaCupons();
+  mostraCupons();
 };
 
 const monitoraCampoAlt = (e) => {
@@ -333,8 +305,8 @@ const monitoraCampoAlt = (e) => {
   else botao.disabled = true;
 };
 
-const salvaTarefas = () => {
-  localStorage.setItem('tarefas', JSON.stringify(tarefas));
+const salvaCupons = () => {
+  localStorage.setItem('cupons', JSON.stringify(cupons));
 };
 
 const adicionaFiltro = () => {
