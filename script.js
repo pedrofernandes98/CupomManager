@@ -78,6 +78,13 @@ onload = () => {
     apagaCupom();
   };
 
+  document.querySelector('#btnFiltro').onclick = () => {
+    mostraFiltroAdicional();
+  };
+
+  document.querySelector('#btnClearExpirados').onclick = () => {
+    ExcluirExpirados();
+  };
   // const inputCupomFilterTest = document.getElementById('inputCupomFilter');
   // console.log(inputCupomFilterTest);
 
@@ -197,7 +204,7 @@ const adicionaCupom = () => {
   let dataExpiracao = campoDataExpiracao.value;
   let codigo = campoCodigo.value;
   let dataAtual = new Date();
-  let status = Date.parse(dataExpiracao) < dataAtual.getDate();
+  let status = Date.parse(dataExpiracao) << dataAtual.getDate();
 
   //Realizar validações de formulários
   if (descricao != '') {
@@ -378,3 +385,38 @@ const removeCuponsByInput = (elementInput) => {
 const salvaFiltro = () => {
   localStorage.setItem('filtros', JSON.stringify(filtros));
 };
+
+const mostraFiltroAdicional = () => {
+  const elementAdicionalFiltro = document.querySelector('.componentSecundaryHeader');
+  const elementContent = document.querySelector('.componentContent');
+  const displayComponent = elementAdicionalFiltro.style.display;
+  const displayDefault = 'none';
+
+  if(displayComponent === displayDefault){
+    elementAdicionalFiltro.style.display = 'flex';
+    elementContent.style.padding = '1rem';
+    window.scrollTo(0,0);
+    return;
+  }
+
+  elementAdicionalFiltro.style.display = displayDefault;
+  elementContent.style.padding = '5rem 1rem 1rem 1rem';
+  
+};
+
+const ExcluirExpirados = () => {
+  console.log(cupons);
+  
+  cupons.forEach(item => {
+    if(!item.status){
+      cupons = cupons.filter((i) => i.id != item.id);
+    }
+  });
+
+  console.log(cupons);
+  salvaCupons();
+  document.getElementById('inputCupomFilter').value = '';
+  mostraCupons();
+  alert("Cupons expirados excluídos com sucesso!");
+  mostraFiltroAdicional();
+}

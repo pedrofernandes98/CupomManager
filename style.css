@@ -8,7 +8,7 @@
 }
 
 body {
-  padding-top: 5rem;
+  padding-top: 3rem;
 }
 
 .hidden {
@@ -42,7 +42,7 @@ p {
   width: 100%;
   background-color: #1d3a4e;
   color: #fff;
-  height: 5rem;
+  height: 3rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -50,7 +50,7 @@ p {
 }
 
 .appName {
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-left: 1rem;
 }
 
@@ -89,11 +89,21 @@ p {
 }
 
 .componentContent {
-  padding: 1rem;
+  padding: 5rem 1rem 1rem 1rem;
 }
 
-.componentHeader+.componentContent {
+.componentHeader+.componentSecundaryHeader{
   padding-top: 5.5rem;
+}
+
+/* .componentSecundaryHeader+.componentContent {
+  padding-top: 5.5rem;
+} */
+
+.componentSecundaryHeader{
+  width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .navBar {
@@ -237,7 +247,7 @@ p {
   border: thin solid #dce5e8;
   border-radius: 0.35rem;
   width: 100%;
-  margin: 0rem 1rem;
+  margin: 0rem 0rem 0rem 1rem;
 }
 
 .field input.valid {
@@ -259,7 +269,7 @@ p {
   background: #fff;
   border-color: #dce5e8;
   border-style: solid;
-  border-width: 0 thin thin thin;
+  border-width: thin thin thin thin;
   /* display: flex; */
   flex-direction: row;
   justify-content: space-between;

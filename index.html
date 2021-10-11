@@ -22,15 +22,18 @@
           <input id="inputCupomFilter" type="text" autocomplete="off" 
             placeholder="Digite um texto de pesquisa..." class="fieldWithoutLabel"
             oninput="removeCuponsByInput(this)"/>
-            <!-- <button id="btnFiltro" class="button secundary">
-                <img src="./assets/lupa.png" />
-            </button> -->
-        
+            
+            <button id="btnFiltro" class="button secundary" style="margin: 0rem 1rem; height: 2.5rem;">
+                <img src="./assets/filter-plus-outline.svg" />
+            </button>
+      </div>
+      <div class="componentSecundaryHeader" style="display: none;">    
+          <button id="btnClearExpirados" class="btnClear button primary">Excluir cupons expirados</button>
       </div>
       <div class="componentContent">
         <div id="blank">
-          <img src="./assets/hangloose.png" />
-          <p>Nada a fazer agora.</p>
+          <img src="./assets/semCupons.png" style="max-width: 90%;" />
+          <p>Sem cupons disponíveis.</p>
         </div>
         <ul id="listaCupons" class="list">
                  
