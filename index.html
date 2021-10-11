@@ -18,11 +18,14 @@
       <button id="btnAdic" class="button primary btnAdd">
         <img src="./assets/plus1.png" />
       </button>
-      <div class="componentHeader">
-            <h2 class="componentTitle">Filtros</h2>
-            <button id="btnFiltro" class="button secundary">
+      <div class="componentHeader">    
+          <input id="inputCupomFilter" type="text" autocomplete="off" 
+            placeholder="Digite um texto de pesquisa..." class="fieldWithoutLabel"
+            oninput="removeCuponsByInput(this)"/>
+            <!-- <button id="btnFiltro" class="button secundary">
                 <img src="./assets/lupa.png" />
-            </button>
+            </button> -->
+        
       </div>
       <div class="componentContent">
         <div id="blank">
@@ -111,7 +114,7 @@
         </div>
         <div class="buttonGroup end mt3">
           <button id="btnDel" class="button quarter danger">
-            Apagar cupom
+            Apagar tarefa
           </button>
         </div>
       </div>

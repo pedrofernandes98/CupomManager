@@ -1,6 +1,7 @@
 let cupons = [];
 let filtros = {};
 
+
 onload = () => {
   let tabs = document.querySelectorAll('.navBar .tab');
 
@@ -77,13 +78,17 @@ onload = () => {
     apagaCupom();
   };
 
-  document.querySelector('#btnFiltro').onclick = () => {
-    ativa('tela4');
-  };
+  // const inputCupomFilterTest = document.getElementById('inputCupomFilter');
+  // console.log(inputCupomFilterTest);
 
-  document.querySelector('#btnFiltro').onclick = () => {
-    ativa('tela4');
-  };
+  // inputCupomFilter.addEventListener('input', removeCuponsByInput(inputCupomFilter));
+  // document.querySelector('#btnFiltro').onclick = () => {
+  //   ativa('tela4');
+  // };
+
+  // document.querySelector('#btnFiltro').onclick = () => {
+  //   ativa('tela4');
+  // };
 
   // document.querySelector('#btnFiltrar').onclick = () => {
   //   adicionaFiltro();
@@ -92,6 +97,8 @@ onload = () => {
   //   mostraCupons();
   // };
 };
+
+
 
 const mostraCupons = () => {
   const listaCupons = document.querySelector('#listaCupons');
@@ -113,6 +120,7 @@ const mostraCupons = () => {
   cupons.forEach((t) => {
     console.log(t)
     let elemCupom = document.createElement('li');
+    elemCupom.classList.add("cupomItem");
     elemCupom.innerHTML = `<div class="" style="border: solid 1px;">
     <div class="containerCupom">
         <div class="percentCupom">
@@ -320,6 +328,52 @@ const adicionaFiltro = () => {
     dataFinal: dataFinal.value
   }
 }
+
+const removeCuponsByInput = (elementInput) => {
+  console.log(elementInput);
+  const inputValue = elementInput.value.toLowerCase();
+  const cuponsList = document.querySelectorAll(".cupomItem");
+
+  cuponsList.forEach(item => {
+    //console.log(item)
+    const percentCupomText = item.querySelector(".percentCupom").textContent.toLowerCase();
+    //console.log(percentCupomText)
+    const descriptionCupomText = item.querySelector(".descriptionCupom").textContent.toLowerCase();
+
+    if(percentCupomText.includes(inputValue) || descriptionCupomText.includes(inputValue)){
+      item.style.display = 'list-item';
+      return;
+    }
+
+    item.style.display = 'none';
+
+  });
+
+
+};
+
+
+
+// inputCupomFilter.addEventListener('input', removeCuponsByInput(e));
+
+// inputCupomFilter.addEventListener('input', () => {
+  //console.log('passei');
+  // const inputValue = event.target.value.toLowerCase();
+  // const cuponsList = document.querySelector(".cupomItem");
+
+  // cuponsList.forEach(item => {
+  //   const percentCupomText = item.querySelector("percentCupom").textContent.toLowerCase();
+  //   const descriptionCupomText = item.querySelector("descriptionCupom").textContent.toLowerCase();
+
+  //   if(percentCupomText.includes(inputValue) || descriptionCupomText.includes(inputValue)){
+  //     item.style.display = 'list-item';
+  //     return;
+  //   }
+
+  //   item.style.display = 'none';
+
+  // })
+// })
 
 const salvaFiltro = () => {
   localStorage.setItem('filtros', JSON.stringify(filtros));
