@@ -77,8 +77,6 @@ p {
   justify-content: space-between;
 }
 
-
-
 .componentTitle {
   margin-left: 1rem;
   flex: 1;
@@ -95,10 +93,6 @@ p {
 .componentHeader+.componentSecundaryHeader{
   padding-top: 5.5rem;
 }
-
-/* .componentSecundaryHeader+.componentContent {
-  padding-top: 5.5rem;
-} */
 
 .componentSecundaryHeader{
   width: 100%;

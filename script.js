@@ -85,24 +85,7 @@ onload = () => {
   document.querySelector('#btnClearExpirados').onclick = () => {
     ExcluirExpirados();
   };
-  // const inputCupomFilterTest = document.getElementById('inputCupomFilter');
-  // console.log(inputCupomFilterTest);
-
-  // inputCupomFilter.addEventListener('input', removeCuponsByInput(inputCupomFilter));
-  // document.querySelector('#btnFiltro').onclick = () => {
-  //   ativa('tela4');
-  // };
-
-  // document.querySelector('#btnFiltro').onclick = () => {
-  //   ativa('tela4');
-  // };
-
-  // document.querySelector('#btnFiltrar').onclick = () => {
-  //   adicionaFiltro();
-  //   salvaFiltro();
-  //   ativa('tela1');
-  //   mostraCupons();
-  // };
+  
 };
 
 
@@ -110,22 +93,8 @@ onload = () => {
 const mostraCupons = () => {
   const listaCupons = document.querySelector('#listaCupons');
   listaCupons.innerHTML = '';
-  //let listaFiltrada = [];
-
-    // if(filtros){
-    //   var str = filtros.texto.toLowerCase();
-    //   cupons.forEach((t) => {
-    //     if(t.lojaCupom.toLowerCase().includes(str) || t.descricao.toLowerCase().includes(str)){
-    //       listaFiltrada.push(t);
-    //     }
-    //   });
-
-    //   cupons = listaFiltrada;
-    // }
   
-  console.log(cupons);
   cupons.forEach((t) => {
-    console.log(t)
     let elemCupom = document.createElement('li');
     elemCupom.classList.add("cupomItem");
     elemCupom.innerHTML = `<div class="" style="border: solid 1px;">
@@ -155,8 +124,6 @@ const mostraCupons = () => {
       let campoDataExpiracao = document.querySelector('#tela3 #inputDataExpiracao');
       let campoCodigo = document.querySelector('#tela3 #inputCodigo');
       ativa('tela3');
-
-      console.log(t.lojaCupom)
       
       campoLojaCupom.value = t.lojaCupom; 
       campoDescricao.value = t.descricao;
@@ -170,7 +137,7 @@ const mostraCupons = () => {
     };
     listaCupons.appendChild(elemCupom);
   });
-  //document.querySelector('#estado').innerText = cupons.length;
+
   if (cupons.length > 0) {
     listaCupons.classList.remove('hidden');
     document.querySelector('#blank').classList.add('hidden');
@@ -179,8 +146,6 @@ const mostraCupons = () => {
     document.querySelector('#blank').classList.remove('hidden');
   }
 };
-
-
 
 const ativa = (comp) => {
   let listaDeTelas = document.querySelectorAll('body > .component');
@@ -230,8 +195,6 @@ const adicionaCupom = () => {
     salvaCupons();
     mostraCupons();
   }
-
-  console.log(cupons);
 };
 
 const monitoraCampoAdic = (e) => {
@@ -342,9 +305,8 @@ const removeCuponsByInput = (elementInput) => {
   const cuponsList = document.querySelectorAll(".cupomItem");
 
   cuponsList.forEach(item => {
-    //console.log(item)
+
     const percentCupomText = item.querySelector(".percentCupom").textContent.toLowerCase();
-    //console.log(percentCupomText)
     const descriptionCupomText = item.querySelector(".descriptionCupom").textContent.toLowerCase();
 
     if(percentCupomText.includes(inputValue) || descriptionCupomText.includes(inputValue)){
@@ -355,32 +317,7 @@ const removeCuponsByInput = (elementInput) => {
     item.style.display = 'none';
 
   });
-
-
 };
-
-
-
-// inputCupomFilter.addEventListener('input', removeCuponsByInput(e));
-
-// inputCupomFilter.addEventListener('input', () => {
-  //console.log('passei');
-  // const inputValue = event.target.value.toLowerCase();
-  // const cuponsList = document.querySelector(".cupomItem");
-
-  // cuponsList.forEach(item => {
-  //   const percentCupomText = item.querySelector("percentCupom").textContent.toLowerCase();
-  //   const descriptionCupomText = item.querySelector("descriptionCupom").textContent.toLowerCase();
-
-  //   if(percentCupomText.includes(inputValue) || descriptionCupomText.includes(inputValue)){
-  //     item.style.display = 'list-item';
-  //     return;
-  //   }
-
-  //   item.style.display = 'none';
-
-  // })
-// })
 
 const salvaFiltro = () => {
   localStorage.setItem('filtros', JSON.stringify(filtros));
