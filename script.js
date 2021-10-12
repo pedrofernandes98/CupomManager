@@ -1,10 +1,12 @@
+//Declaração das listas de registros da aplicação
 let cupons = [];
 let filtros = {};
 
-
+//Ao carregar a página este método é executado
 onload = () => {
   let tabs = document.querySelectorAll('.navBar .tab');
 
+  //Exibe o elemente passo como parâmetro
   const mostra = (elem) => {
     if (elem) {
       for (let i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
@@ -26,17 +28,20 @@ onload = () => {
 
   mostra();
   
+  //Busca os itens armazenados no LocalStorage e inicializa na aplicação
   const t = JSON.parse(localStorage.getItem('cupons'));
   const f = JSON.parse(localStorage.getItem('filtros'));
   if (t) cupons = t;
   if (f) filtros = f;
   mostraCupons();
-
+  
+  //Adiciona evento de clique ao botão "btnAdic" que redireciona para página de cadastro
   document.querySelector('#btnAdic').onclick = () => {
     document.querySelector('#btnInc').disabled = false;
     ativa('tela2');
   };
 
+  //Adiciona evento de clique ao botão "btnCanc1" que cancela a inclusão de um novo registro e limpa os inputs
   document.querySelector('#btnCanc1').onclick = () => {
     document.querySelector('#inputCupom').value = '';
     document.querySelector('#inputDescricao').value = '';
@@ -47,6 +52,7 @@ onload = () => {
     ativa('tela1');
   };
 
+  //Adiciona evento de clique ao botão "btnCanc2" que cancela a inclusão de um novo registro e limpa os inputs
   document.querySelector('#btnCanc2').onclick = () => {
     let campoLojaCupom = document.querySelector('#tela3 #inputCupom');
     let campoDescricao = document.querySelector('#tela3 #inputDescricao');
@@ -66,6 +72,7 @@ onload = () => {
     ativa('tela1');
   };
 
+  //Adiciona evento de clique aos botão da aplicação e chama para o método correspondente às ações do evento
   document.querySelector('#btnInc').onclick = () => {
     adicionaCupom();
   };
@@ -89,14 +96,19 @@ onload = () => {
 };
 
 
-
+//Função responsável por exibir os cupons na Tela Principal
 const mostraCupons = () => {
+  //Carrega a <ul> do DOM para inserir elementos
   const listaCupons = document.querySelector('#listaCupons');
   listaCupons.innerHTML = '';
   
+  //Para cada cupom presente na lista "cupons" armazenadas na variável 't'
   cupons.forEach((t) => {
+    //Cria um elemento <li>
     let elemCupom = document.createElement('li');
+    //Adiciona a classe "cupomItem"
     elemCupom.classList.add("cupomItem");
+    //Cria o HTML do elemento de cupom interpolando com os valores das variáveis cadastrados pro cupom
     elemCupom.innerHTML = `<div class="" style="border: solid 1px;">
     <div class="containerCupom">
         <div class="percentCupom">
@@ -116,6 +128,7 @@ const mostraCupons = () => {
     margin: 5px 0px 5px 0px;">Ver cupom</button>
     </div> `;
     elemCupom.setAttribute('data-id', t.id)
+    //Adicona evento de clique ao elemento
     elemCupom.onclick = () => {
       let campoLojaCupom = document.querySelector('#tela3 #inputCupom');
       let campoDescricao = document.querySelector('#tela3 #inputDescricao');
@@ -147,13 +160,16 @@ const mostraCupons = () => {
   }
 };
 
+//Função que torna visível um componente do DOM
 const ativa = (comp) => {
   let listaDeTelas = document.querySelectorAll('body > .component');
   listaDeTelas.forEach((c) => c.classList.add('hidden'));
   document.querySelector('#' + comp).classList.remove('hidden');
 };
 
+//Função que adiciona um novo cupom no LocalStorage da aplicação
 const adicionaCupom = () => {
+  //Busca valor dos campos
   let campoLojaCupom = document.querySelector('#inputCupom');
   let campoDescricao = document.querySelector('#inputDescricao');
   let campoPercentual = document.querySelector('#inputPercentual');
@@ -161,7 +177,7 @@ const adicionaCupom = () => {
   let campoDataExpiracao = document.querySelector('#inputDataExpiracao');
   let campoCodigo = document.querySelector('#inputCodigo');
 
-
+  //Atribui às variáveis
   let lojaCupom = campoLojaCupom.value;
   let descricao = campoDescricao.value;
   let percentual = campoPercentual.value;
@@ -169,9 +185,9 @@ const adicionaCupom = () => {
   let dataExpiracao = campoDataExpiracao.value;
   let codigo = campoCodigo.value;
   let dataAtual = new Date();
-  let status = Date.parse(dataExpiracao) << dataAtual.getDate();
-
-  //Realizar validações de formulários
+  let status = Date.parse(dataExpiracao) < dataAtual.getDate();
+  console.log(status);
+  //Adiciona a lista
   if (descricao != '') {
     cupons.push({
       id: Math.random().toString().replace('0.', ''),
@@ -184,6 +200,8 @@ const adicionaCupom = () => {
       status: status
     });
 
+    console.log(cupons);
+    //Limpa os campos
     campoLojaCupom.value = ''; 
     campoDescricao.value = '';
     campoPercentual.value = '';
@@ -191,6 +209,7 @@ const adicionaCupom = () => {
     campoDataExpiracao.value = '';
     campoCodigo.value = '';
 
+    //Salva a lista com o novo cupom e retorna a tela principal
     ativa('tela1');
     salvaCupons();
     mostraCupons();
@@ -203,6 +222,7 @@ const monitoraCampoAdic = (e) => {
   else botao.disabled = true;
 };
 
+//Função que altera cupom no LocalStorage da aplicação
 const alteraCupom = () => {
   
   let campoLojaCupom = document.querySelector('#tela3 #inputCupom');
@@ -221,8 +241,8 @@ const alteraCupom = () => {
   let codigo = campoCodigo.value;
   console.log(codigo);
   let dataAtual = new Date();
-  let status = Date.parse(dataExpiracao) << dataAtual.getDate();
-
+  let status = Date.parse(dataExpiracao) < dataAtual.getDate();
+  console.log(status);
   let idCupom = campoLojaCupom.getAttribute('data-id');
   
   let i = cupons.findIndex((t) => t.id == idCupom);
@@ -238,7 +258,9 @@ const alteraCupom = () => {
     codigo: codigo,
     status: status
   };
-  
+  cupons[i].status = status;
+
+  console.log(cupons[i].status)
   campoLojaCupom.value = ''; 
   campoDescricao.value = '';
   campoPercentual.value = '';
@@ -253,6 +275,7 @@ const alteraCupom = () => {
   mostraCupons();
 };
 
+//Função que remove um cupom da aplicação
 const apagaCupom = () => {
   let campoLojaCupom = document.querySelector('#tela3 #inputCupom');
   let campoDescricao = document.querySelector('#tela3 #inputDescricao');
@@ -299,6 +322,7 @@ const adicionaFiltro = () => {
   }
 }
 
+//Função que filtra os elementos que possuem o texto digitado no input de filtro
 const removeCuponsByInput = (elementInput) => {
   console.log(elementInput);
   const inputValue = elementInput.value.toLowerCase();
@@ -309,11 +333,13 @@ const removeCuponsByInput = (elementInput) => {
     const percentCupomText = item.querySelector(".percentCupom").textContent.toLowerCase();
     const descriptionCupomText = item.querySelector(".descriptionCupom").textContent.toLowerCase();
 
+    //Verifica se os elementos do cupom possuem o texto digita
     if(percentCupomText.includes(inputValue) || descriptionCupomText.includes(inputValue)){
+      //Se sim, exibe na lista
       item.style.display = 'list-item';
       return;
     }
-
+    //Se não, esconde da lista a ser exibida
     item.style.display = 'none';
 
   });
@@ -323,6 +349,7 @@ const salvaFiltro = () => {
   localStorage.setItem('filtros', JSON.stringify(filtros));
 };
 
+//Função responsável por exibir e esconder o botão de "Excluir todos os expirados"
 const mostraFiltroAdicional = () => {
   const elementAdicionalFiltro = document.querySelector('.componentSecundaryHeader');
   const elementContent = document.querySelector('.componentContent');
@@ -341,6 +368,7 @@ const mostraFiltroAdicional = () => {
   
 };
 
+//Função responsável por remover da lista da aplicação os cupons expirados
 const ExcluirExpirados = () => {
   console.log(cupons);
   
@@ -357,3 +385,6 @@ const ExcluirExpirados = () => {
   alert("Cupons expirados excluídos com sucesso!");
   mostraFiltroAdicional();
 }
+
+//Registra service worker da aplicação
+navigator.serviceWorker.register('./serviceworker.js');

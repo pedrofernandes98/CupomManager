@@ -1,0 +1,37 @@
+{
+    "name": "CupomManager - Gerenciador de cupons",
+    "short_name": "CupomManager",
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#3b78ac",
+    "background_color": "white",
+    "orientation": "portrait",
+    "description": "O aplicativo CupomManager consiste em uma aplicação que permite aos usuários cadastrarem, atualizarem e gerenciarem seus códigos de cupons virtuais para serem aplicados em e-commerces e demais transações online. Desta forma, a aplicação visa facilitar a recuperação e utilização de cupons que foram adquiridos fora do ambiente virtual da loja (como em eventos, sites especializados na divulgação de cupons, promoões especiais, entre outros) e desta forma não foram diretamente associados a conta.",
+    "icons": [
+      {
+        "src": "./assets/appicons/android-icon-48x48.png",
+        "sizes": "48x48",
+        "type": "image/png"
+      },
+      {
+        "src": "./assets/appicons/android-icon-72x72.png",
+        "sizes": "72x72",
+        "type": "image/png"
+      },
+      {
+        "src": "./assets/appicons/android-icon-96x96.png",
+        "sizes": "96x96",
+        "type": "image/png"
+      },
+      {
+        "src": "./assets/appicons/android-icon-144x144.png",
+        "sizes": "144x144",
+        "type": "image/png"
+      },
+      {
+        "src": "./assets/appicons/android-icon-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }
+    ]
+  }
